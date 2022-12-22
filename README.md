@@ -1,4 +1,4 @@
-# test-app to create invoices .xlsx and .txt
+# test-app 
 
 1. npm install
 2. npm run start
