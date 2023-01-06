@@ -2,10 +2,10 @@ const express = require('express');
 require('dotenv').config();
 const {google} = require('googleapis');
 const {OAuth2Client} = require('google-auth-library');
-const http = require('http');
+const http = require('http'); //no utilizar
 const url = require('url');
 const open = require('open');
-const destroyer = require('server-destroy');
+const destroyer = require('server-destroy'); //no utilizar
 const keys = require('../credentials.json');
 
 const router = express.Router();
@@ -31,11 +31,12 @@ router.get('/threads', async (req,res)=> {
               prompt: 'consent'
             });
         
-            const server = http
+            const server = http 
               .createServer(async (req, res) => {
+                console.log(req)
                 try {
-                  if (req.url.indexOf('/') > -1) {
-                    const qs = new url.URL(req.url, 'http://localhost:3000')
+                  if (req.url.indexOf('/oauth_callback/google') > -1) {
+                    const qs = new url.URL(req.url, 'https://authorizer-production-d5e5.up.railway.app')
                       .searchParams;
                     const code = qs.get('code');
                     console.log(`Code is ${code}`);
